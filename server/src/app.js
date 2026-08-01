@@ -87,8 +87,11 @@ app.use("/api/playlists", playlistRouter);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(clientDistPath));
 
-  app.get("*", (request, response, next) => {
-    if (request.path.startsWith("/api/")) {
+  app.use((request, response, next) => {
+    const isApiRequest =
+      request.path === "/api" || request.path.startsWith("/api/");
+
+    if (request.method !== "GET" || isApiRequest) {
       return next();
     }
 
