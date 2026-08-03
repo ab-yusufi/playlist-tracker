@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-
+import ThemeToggle from "./ThemeToggle.jsx";
 export default function AuthLayout({
   title,
   description,
@@ -11,9 +11,13 @@ export default function AuthLayout({
   return (
     <main className="auth-page">
       <section className="auth-brand">
-        <Link className="brand" to="/">
-          Playlist Tracker
-        </Link>
+        <div className="auth-topbar">
+          <Link className="brand" to="/">
+            Playlist Tracker
+          </Link>
+
+          <ThemeToggle />
+        </div>
 
         <h1>Finish the playlists you start.</h1>
 

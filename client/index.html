@@ -4,7 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <title>Playlist Tracker</title>
+    <script>
+      (() => {
+        const storageKey = "playlist-tracker-theme";
+        let storedTheme = null;
+
+        try {
+          storedTheme = localStorage.getItem(storageKey);
+        } catch {
+          // localStorage may be unavailable in some browser modes.
+        }
+
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+
+        const theme =
+          storedTheme === "dark" || storedTheme === "light"
+            ? storedTheme
+            : systemTheme;
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
